@@ -3,12 +3,24 @@ package br.com.fiap.domain.repository;
 import br.com.fiap.domain.entity.Artista;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ArtistaRepository implements Repository<Artista, Long>{
 
 
-    List<Artista> artistas;
+    private  static List<Artista> artistas;
+
+    static {
+
+        artistas = new ArrayList<>();
+
+        Artista matue = new Artista(666L, "AC DC");
+        Artista teto = new Artista(333L, "Dio");
+        Artista daniel = new Artista(1L, "Michael Jackson");
+
+        artistas.addAll(Arrays.asList(matue, teto, daniel));
+    }
 
     @Override
     public List<Artista> findAll() {
@@ -17,9 +29,9 @@ public class ArtistaRepository implements Repository<Artista, Long>{
 
     @Override
     public Artista findById(Long id) {
-        for (int i = 0; i < artistas.size(); i++) {
-            if (artistas.get( i ).getId().equals( id )) {
-                return artistas.get( i );
+        for (Artista a : artistas) {
+            if (a.getId().equals( id )) {
+                return a;
             }
         }
         return null;

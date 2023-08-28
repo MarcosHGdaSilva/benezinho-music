@@ -8,14 +8,15 @@ import java.util.Objects;
 
 public class ArtistaService implements Service<Artista, Long>{
 
-    private  ArtistaRepository repository;
+    private ArtistaRepository repository;
 
-    public ArtistaService() {
+    public ArtistaService(){
         this.repository = new ArtistaRepository();
     }
 
+
     @Override
-    public List<Artista> findAll() {
+    public List findAll() {
         return repository.findAll();
     }
 
@@ -31,10 +32,9 @@ public class ArtistaService implements Service<Artista, Long>{
 
     @Override
     public Artista persist(Artista artista) {
-        if(Objects.nonNull(artista)){
-            repository.persist(artista);
-        }else{
-            return null;
+        if (Objects.nonNull(artista)){
+            return repository.persist(artista);
         }
+        return null;
     }
 }
